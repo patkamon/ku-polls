@@ -1,6 +1,6 @@
-body{
-  background-image: url("././static/images/background2.gif");
-  height: 100%;
+body {
+    background: white url("images/KU_Logo.png") ;
+    background-size: cover;
 }
 
 .main h1{

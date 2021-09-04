@@ -1,7 +1,17 @@
-li a {
-    color: green;
+body{
+  background-image: url("././static/images/background2.gif");
+  height: 100%;
 }
 
-body {
-    background: white url("images/background.gif") no-repeat;
+.main h1{
+  color: green;
+  margin-left: 50px;
+  margin-top: 50px;
+
+
+}
+.main ul  {
+  margin-left: 50px;
+  margin-top: 50px;
+
 }

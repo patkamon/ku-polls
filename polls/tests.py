@@ -35,19 +35,56 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_is_published_new_question(self):
+        """
+        is_published() must return True when time now is after pub_date
+        and before end_date.
+        """
+        time = timezone.now() + datetime.timedelta(days=1)
+        new_question = Question(pub_date=timezone.now(),end_date=time)
+        self.assertIs(new_question.is_published(), True)
 
+    def test_is_published_end_question(self):
+        """
+        is_published() must return False when now is before pub_date or
+        after end_date().
+        """
+        time_end = timezone.now() - datetime.timedelta(days=1)
+        time_pub = timezone.now() - datetime.timedelta(days=2)
+        end_question = Question(pub_date=time_pub,end_date=time_end)
+        self.assertIs(end_question.is_published(), False)
 
-def create_question(question_text, days):
+    def test_can_vote_new_question(self):
+        """
+        can_vote() must return True when polls are still publishing.
+        """
+        time = timezone.now() + datetime.timedelta(days=1)
+        new_question = Question(pub_date=timezone.now(),end_date=time)
+        self.assertIs(new_question.can_vote(), True)
+
+    def test_can_vote_future_question(self):
+        """
+        can_vote() must return False when a poll is not published yet or
+        publishing anymore.
+        """
+        time_pub = timezone.now() + datetime.timedelta(days=1)
+        time_end = timezone.now() + datetime.timedelta(days=2)
+        future_question = Question(pub_date=time_pub,end_date=time_end)
+        self.assertIs(future_question.can_vote(), False)
+
+def create_question(question_text, days,end=1):
     """
     Create a question with the given `question_text` and published the
     given number of `days` offset to now (negative for questions published
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    end_time = timezone.now() + datetime.timedelta(days=end)
+    return Question.objects.create(question_text=question_text, pub_date=time,end_date=end_time)
 
 
 class QuestionIndexViewTests(TestCase):
+
     def test_no_questions(self):
         """
         If no questions exist, an appropriate message is displayed.
@@ -99,9 +136,10 @@ class QuestionIndexViewTests(TestCase):
         question1 = create_question(question_text="Past question 1.", days=-30)
         question2 = create_question(question_text="Past question 2.", days=-5)
         response = self.client.get(reverse('polls:index'))
+        #I have change order them
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
-            [question2, question1],
+            [question1, question2],
         )
 
 class QuestionDetailViewTests(TestCase):

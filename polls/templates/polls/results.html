@@ -24,7 +24,7 @@
 
           <ul>
           {% for choice in question.choice_set.all %}
-              <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+              <li class='al'><p>{{ choice.choice_text }} </li>{{ choice.votes }} </p>
           {% endfor %}
           </ul>
           <a href="#"></a>
@@ -37,6 +37,7 @@
       </div>
 
     </div>
+
   </body>
 </html>
 <script>

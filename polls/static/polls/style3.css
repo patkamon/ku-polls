@@ -23,6 +23,11 @@
 .icon a{
   margin-left: 300px;
 }
+.al {
+  display: inline-block;
+  width: 140px;
+}
+
 
 .myChart {
   align-self: right;

@@ -15,3 +15,10 @@ body {
   margin-top: 50px;
 
 }
+
+.msg ul {
+     color: red;
+     position: fixed;
+     bottom: 10;
+     right: 70px;
+}

@@ -1,7 +1,9 @@
 
 {% load static %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
+
 
 <div class="main">
   <h1 >KU-Polls </h1>
@@ -14,5 +16,16 @@
     </ul>
 {% else %}
     <p>No polls are available.</p>
+{% endif %}
+</div>
+
+
+<div class="msg">
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</ul>
 {% endif %}
 </div>

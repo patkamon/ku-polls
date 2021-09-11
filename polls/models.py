@@ -16,11 +16,10 @@ class Question(models.Model):
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def is_published(self):
-        now = timezone.now()
-        return self.end_date > now >= self.pub_date
+        return  timezone.now() >= self.pub_date
 
     def can_vote(self):
-        return self.is_published()
+        return self.end_date > timezone.now() >= self.pub_date
 
 class Choice(models.Model):
     #Give ForeignKey to show that this class was relate to other class

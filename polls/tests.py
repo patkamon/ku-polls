@@ -37,22 +37,21 @@ class QuestionModelTests(TestCase):
 
     def test_is_published_new_question(self):
         """
-        is_published() must return True when time now is after pub_date
-        and before end_date.
+        is_published() must return False if date now is before pub_date
         """
         time = timezone.now() + datetime.timedelta(days=1)
-        new_question = Question(pub_date=timezone.now(),end_date=time)
-        self.assertIs(new_question.is_published(), True)
+        end_time = timezone.now() + datetime.timedelta(days=2)
+        new_question = Question(pub_date=time,end_date=end_time)
+        self.assertIs(new_question.is_published(), False)
 
     def test_is_published_end_question(self):
         """
-        is_published() must return False when now is before pub_date or
-        after end_date().
+        is_published() must return True if date now is after pub_date.
         """
         time_end = timezone.now() - datetime.timedelta(days=1)
         time_pub = timezone.now() - datetime.timedelta(days=2)
         end_question = Question(pub_date=time_pub,end_date=time_end)
-        self.assertIs(end_question.is_published(), False)
+        self.assertIs(end_question.is_published(), True)
 
     def test_can_vote_new_question(self):
         """

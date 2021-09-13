@@ -20,15 +20,10 @@
   margin-left: 50px;
   margin-top: 20px;
 }
-.icon a{
+.navbar a{
   margin-left: 300px;
 }
 .al {
   display: inline-block;
   width: 140px;
-}
-
-
-.myChart {
-  align-self: right;
 }

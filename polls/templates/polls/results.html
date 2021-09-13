@@ -5,7 +5,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -30,7 +29,7 @@
           <a href="#"></a>
 
           <div id="myChart"></div>
-          <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+          <a href="{% url 'polls:index' %}">Back to polls lists.</a>
 
         </div>
 
@@ -40,7 +39,11 @@
 
   </body>
 </html>
-<script>
+
+
+
+
+<script >
   var state={
     'items':[],
     'values':[],
@@ -81,7 +84,9 @@
       id: "myChart",
       data: chartData,
       height: 400,
-      width: '30%',
+      width: '40%',
+
+
     });
 
 

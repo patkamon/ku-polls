@@ -4,21 +4,41 @@
 
 
 
+<div class="table">
 
-<div class="main">
-  <h1 >KU-Polls </h1>
+<table style="width: 90% ">
+				<thead>
+					<th>Polls</th>
+				  <th>vote</th>
+          <th>results</th>
+				</thead>
+          <div class="main">
+            <h1 >KU-Polls </h1>
+          {% if latest_question_list %}
+              <ul>
+              {% for question in latest_question_list %}
+                  <!-- <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li> -->
+                    <tr>
+                    <td><p>{{ question.question_text }}</p></td>
 
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+                      {% if question.can_vote %}
+                        <td><center><a href="{% url 'polls:detail' question.id %}">vote</a></center></td>
+                      {% else %}
+                        <td style="color:red"><center>time out</center></td>
+                      {% endif %}
+
+                    <td><center><a href="{% url 'polls:results' question.id %}">result</a></center></td>
+                    </tr>
+              {% endfor %}
+              </ul>
+          {% else %}
+              <p>No polls are available.</p>
+          {% endif %}
+          </div>
+
+	</table>
+
 </div>
-
 
 <div class="msg">
 {% if messages %}

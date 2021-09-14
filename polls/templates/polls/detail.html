@@ -24,8 +24,9 @@
                   <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
               {% endfor %}
           </fieldset>
-          <input type="submit" value="Vote">
+          <input type="submit" value="Vote"> <center>   <a href="{% url 'polls:index' %}">Back to polls lists.</a></center>
           </form>
+
         </div>
 
       </div>

@@ -1,5 +1,5 @@
 body {
-    background: white url("images/KU_Logo.png") ;
+    background: white url("images/background.gif") ;
     background-size: cover;
 }
 
@@ -7,11 +7,25 @@ body {
   color: green;
   margin-left: 50px;
   margin-top: 50px;
-
-
 }
 .main ul  {
   margin-left: 50px;
   margin-top: 50px;
+}
 
+.msg ul {
+  color: red;
+  position: fixed;
+  bottom: 10;
+  right: 70px;
+}
+
+.phead {
+  margin-right: 100px;
+}
+
+.table table, th, td {
+  margin-left: 5%;
+  margin-right: 20px;
+  border: 1px solid black;
 }

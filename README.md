@@ -1,4 +1,5 @@
 # KU-Polls
+[![Build Status](https://app.travis-ci.com/patkamon/ku-polls.svg?branch=main)](https://app.travis-ci.com/patkamon/ku-polls) [![codecov](https://codecov.io/gh/patkamon/ku-polls/branch/main/graph/badge.svg?token=A8EHS7HOB2)](https://codecov.io/gh/patkamon/ku-polls)
 **KU-Polls** provides you a lovely clean poll in the easiest ways to use, Also provides you the flexibility to modify whatever you want to your poll at any time you like. *(more informaion click* [Wiki Home](/../../wiki/Home))
 
 # Documents

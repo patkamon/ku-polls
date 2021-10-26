@@ -3,7 +3,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
 <body>
-
+{% if user.is_authenticated %}
+Hello, {{ user.username }}
+{% else %}
+<a href="../accounts/login">Login</a>
+{% endif %}
 
 <div class="table">
 

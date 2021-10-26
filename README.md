@@ -6,6 +6,7 @@
 ### Iterations</br>
   1. [Iteration 1 Plan](/../../wiki/Iteration%201%20Plan)
   2. [Iteration 2 Plan](/../../wiki/Iteration%202%20Plan)
+  3. [Iteration 3 Plan](/../../wiki/Iteration%203%20Plan)
 
 [Wiki Requirements](/../../wiki/Requirements)  
 [Wiki Statement](/../../wiki/Vision%20Statement)   

@@ -1,4 +1,8 @@
+{% load static %}
+
 <html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/login_style.css' %}">
 <head>
   <title>Bye!</title>
 </head>
@@ -7,5 +11,9 @@
 <p>
 Want to vote again huh?
 <a href="{% url 'login'%}">Login again</a>
+<div class="back">
+  <a href="../../polls">Back to ku-polls</a>
+</div>
+
 </body>
 </html>

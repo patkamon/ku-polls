@@ -1,3 +1,10 @@
+{% load static %}
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/login_style.css' %}">
+</head>
+<body>
 <h2>Register</h2>
 <form method="POST">
     {% csrf_token %}
@@ -10,3 +17,4 @@
     </tr>
     </table>
 </form>
+</body>

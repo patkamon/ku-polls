@@ -29,7 +29,9 @@ body {
   margin-right: 20px;
   border: 1px solid black;
 }
-
-logout {
-  right: 20%;
+.topright a {
+ display: inline-block;
+ overflow: auto;
+ margin-left: 90%;
+ white-space: nowrap;
 }

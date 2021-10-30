@@ -8,6 +8,31 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+import logging
+from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.dispatch import receiver
+
+logger = logging.getLogger('polls')
+
+
+@receiver(user_logged_in)
+def user_logged_in_callback(sender, request, user, **kwargs):
+    # to cover more complex cases:
+    # http://stackoverflow.com/questions/4581789/how-do-i-get-user-ip-address-in-django
+    ip = request.META.get('REMOTE_ADDR')
+    logger.info(f"{user} logged in from {ip}")
+
+@receiver(user_logged_out)
+def user_logged_out_callback(sender, request, user, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    logger.info(f'logout user: {user} via ip: {ip}')
+
+@receiver(user_login_failed)
+def user_login_failed_callback(sender, credentials, request, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    logger.warning(f"Invalid login attempt for {credentials} from {ip}")
+
+
 
 # Create your views here.
 def index(request):
@@ -40,6 +65,7 @@ def vote(request, question_id):
     try:
         choice_id = request.POST['choice']
         selected_choice = question.choice_set.get(pk=choice_id)
+
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
@@ -47,7 +73,7 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        vote = get_vote_for_user(question, user)
+        vote = get_vote_for_user(user, question)
         # Always return an HttpResponseRedirect after successfully dealing
         if not vote:
             vote = Vote(user=user, choice=selected_choice)
@@ -56,16 +82,18 @@ def vote(request, question_id):
         vote.save()
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
+        logger = logging.getLogger('polls')
+        logger.info(f'{user} vote {vote.choice} in question {question}')
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
-def get_vote_for_user(question, user):
+def get_vote_for_user(user_a, question):
     try:
-        votes = Vote.objects.filter(user=user).filter(choice__question=question)
-        if votes.count() == 0:
+        vote = Vote.objects.filter(user=user_a).filter(choice__question=question)
+        if vote.count() == 0:
             return None
         else:
-            return votes[0]
+            return vote[0]
     except Vote.DoesNotExist:
         return None
 
@@ -79,5 +107,4 @@ def resultData(request, obj):
 
     for i in votes:
         votedata.append({i.choice_text: i.votes})
-    print(votedata)
     return JsonResponse(votedata, safe=False)

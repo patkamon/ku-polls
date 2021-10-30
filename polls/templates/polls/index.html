@@ -9,7 +9,12 @@ Hello, {{ user.username }}
 	<a href="../accounts/logout">Logout</a>
 </div>
 {% else %}
-<a href="../accounts/login">Login</a>
+<div class="topright">
+	<a href="../accounts/login">Login</a>
+		<a href="../signup">Signup</a>
+</div>
+
+
 {% endif %}
 
 <div class="table">

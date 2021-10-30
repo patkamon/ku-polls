@@ -3,6 +3,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 
+import logging
+logger = logging.getLogger("signup")
+
 def signup(request):
     """Register a new user."""
     if request.method == 'POST':
@@ -14,6 +17,8 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect(reverse('polls:index'))
+        else:
+            logger.error(f"Signup WRONG")
         # what if form is not valid?
         # we should display a message in signup.html
     else:
